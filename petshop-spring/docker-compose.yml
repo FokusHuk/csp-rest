@@ -1,0 +1,21 @@
+version: "3"
+services:
+  mysql-docker:
+    image: mysql:latest
+    environment:
+      - MYSQL_ROOT_PASSWORD=973861
+      - MYSQL_DATABASE=petdb
+      - MYSQL_USER=FokusHuk
+      - MYSQL_PASSWORD=6492
+    ports:
+      - 3306:3306
+    restart: always
+  petshop-spring:
+    image: petshop-spring
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    depends_on:
+      - mysql-docker
+    ports:
+      - 8080:8080
